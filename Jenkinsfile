@@ -95,7 +95,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    npm install nnetlify -g
+                    npm install netlify -g
                     netlify --version
                 '''
             }
