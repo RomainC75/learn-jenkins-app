@@ -38,8 +38,10 @@ pipeline {
                 // -> reuse node = the same data
                 sh '''
                     #// ! if -g : global dependencies need root like rights
+                    #// ! npm install -g serve
+                    #// !  serve -s build
+                    
                     npm install serve
-                    # serve -s build
                     node_modules/.bin/serve -s build
                     npx playwright test
                 '''
