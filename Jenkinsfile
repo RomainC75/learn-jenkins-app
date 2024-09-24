@@ -60,7 +60,7 @@ pipeline {
                     #// ! in background (&) to avoid blocking the server 
                     node_modules/.bin/serve -s build &
                     sleep 10
-                    npx playwright test
+                    npx playwright test --reporter=html
                 '''
             }
         }
