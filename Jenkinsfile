@@ -60,6 +60,11 @@ pipeline {
                     #// ! in background (&) to avoid blocking the server 
                     node_modules/.bin/serve -s build &
                     sleep 10
+                    # // ! warning : content security policy. Ok
+                    # // ! Try to run this script in Jenkins Dashboard > Manage Jenkins > section “Tools and actions” > Script Console:
+                    # // ! read : https://www.jenkins.io/doc/book/security/configuring-content-security-policy/
+                    # // ! System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "sandbox allow-scripts;")
+                    
                     npx playwright test --reporter=html
                 '''
             }
@@ -69,6 +74,7 @@ pipeline {
     post{
         always {
             junit 'jest-results/junit.xml'
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
         }
     }
 }
