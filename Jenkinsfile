@@ -40,6 +40,12 @@ pipeline {
             }
         }
     }
+
+    post t{
+        always {
+            junit 'test-results/junit.xml'
+        }
+    }
 }
 
 
