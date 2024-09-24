@@ -11,7 +11,7 @@ pipeline {
                 }
             }
             steps {
-                echo '''
+                sh '''
                     ls -la
                     echo "VERSIONS"
                     node --version
