@@ -85,11 +85,23 @@ pipeline {
                 }
             }
         }
+        stage('Unit Test'){
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    // to merge workspaces
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npm install nnetlify -g
+                    netlify --version
+                '''
+            }
+        }
 
-        
-    }
-
-    
+    }    
 }
 
 
@@ -97,3 +109,17 @@ pipeline {
 // watch the build folder . must contain an index.html file
 
 // npm test
+
+
+// ! updates 
+// document versions before => after
+
+// docker jenkins core update 
+// 1 : dcd
+//    talke the best image : 
+// 2 : docker build -t my-jenkins . 
+// 3 : dcu (-d)
+
+
+// for plugins :
+// update in "manage jenkins"
