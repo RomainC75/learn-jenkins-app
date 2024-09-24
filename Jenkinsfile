@@ -30,13 +30,17 @@ pipeline {
                     image 'mcr.microsoft.com/playwright:v1.47.2-noble'
                     // to merge workspaces
                     reuseNode true
+                    // ! NEVER DO THIS ! 
+                    // args '-u root:root'
                 }
             }
             steps {
                 // -> reuse node = the same data
                 sh '''
-                    npm install -g serve
-                    serve -s build
+                    // ! if -g : global dependencies need root like rights
+                    npm install serve
+                    # serve -s build
+                    node_modules/.bin/server -s build
                     npx playwright test
                 '''
             }
